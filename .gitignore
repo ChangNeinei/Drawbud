@@ -1,0 +1,6 @@
+*.pyc
+**/migrations
+**/log
+db.sqlite3
+.DS_Store
+/images/
