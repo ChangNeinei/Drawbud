@@ -1,0 +1,105 @@
+html, body {
+   height: 100%;
+ }
+
+h5 {
+  font-weight: lighter;
+}
+
+.rounded-circle {
+  width: 20%;
+}
+
+.heading {
+   height: 150px;
+   background-color: beige;
+ }
+ .jumbotron {
+   margin-bottom: 0em;
+ }
+ .content {
+   background-color: beige;
+   height: 100%;
+ }
+
+ .error {
+   color: red;
+ }
+
+.card-img-top  {
+  font-size: 20px;
+}
+
+.py-4 {
+  background-color: rgba(255, 165, 0, 0.5);
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #FFD700;
+    border-color: #DAA520;
+}
+
+.btn-primary:disabled {
+    color: #fff;
+    background-color: #FFD700;
+    border-color: #DAA520;
+}
+
+#room_canvas {
+  background-color: #002D00;
+  height: 350px;
+  
+}
+
+.btn-primary:hover { 
+  background-color: #FFA500;
+  border-color: #DAA520;
+}
+
+.card-header {
+  font-family: "Gill Sans", sans-serif;
+  background-color: #FFA500;
+}
+
+
+#success {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.table-borderless {
+  font-family: "Gill Sans", sans-serif;
+}
+
+.justify-content-end {
+  text-align: left;
+  font-size: 20px;
+}
+
+.profile {
+  font-style: bold;
+  font-size: 20px;
+}
+
+.pull-left {
+  align: center;
+  vertical-align: center
+}
+
+.title {
+  font-size: 1.0em;
+  margin-right: 10px;
+  vertical-align: center;
+  display:inline;
+}
+#exampleModalLongTitle {
+  font-weight: bold;
+}
+#room_link {
+  font-size: 30px;
+}
+
+
+

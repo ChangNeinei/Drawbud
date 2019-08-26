@@ -1,0 +1,36 @@
+{% extends "drawbud/base.html" %}
+{% load addcss %}
+
+{% block navbar %}
+<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+<li class="active nav-item"><a class="nav-link" href="#">Register</a></li>
+{% endblock %}
+
+{% block heading-text %}
+Register for your account
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-4 offset-sm-4">
+    <h1 class="display-4 text-center" style="margin-top: 5rem; margin-bottom: 3rem">Register</h1>
+    <form method="post" action="{% url 'register' %}">
+      {% for field in form.visible_fields %}
+        <div class="form-group">
+          <label for={{field.name}}> {{field.label_tag}} </label>
+          {{ field|addcss:"form-control" }}
+          <span class="error">
+          {% for error in field.errors %}
+            {{error}}
+          {% endfor %}
+          </span>
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-outline-dark">Submit</button>
+      {% csrf_token %}
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}

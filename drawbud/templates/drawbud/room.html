@@ -1,0 +1,87 @@
+{% extends "drawbud/base.html" %}
+{% load staticfiles %}
+{% block navbar %}
+  <li class="nav-item"><a class="nav-link" href="{% url 'leave_to_lobby' user.username %}">Lobby</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'myprofile' %}">My Profile</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'tutorial' %}">Tutorial</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+{% block heading-text %}
+    <div id="heading-text">
+        Welcome to {{items.room_name}} Room
+        {% if user.username == items.owner.username %}
+          <button type="button" class="btn btn-primary btn-lg" onclick="startGame(this)">Start Game</button>
+        {% endif %}
+    </div>
+    
+{% endblock %}
+{% block user-info %}
+  {{user.first_name}} {{user.last_name}}
+{% endblock %}
+{% block content %}
+<script>
+  var userName = {
+    player: '{{user.username}}'
+  };
+  var roomName = '{{items.room_name}}';
+  var owner = '{{items.owner.username}}';
+  var drawerID = 0;
+  var start = false;
+  var curr_drawer = owner;
+  var voc;
+</script>
+<script src="{% static 'drawbud/room.js' %}"></script>
+
+<div class="container content">
+    <div class="row">
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+          <div id="success">
+            
+          </div>
+        	<div class="card">
+        		<div class="card" style="padding:1rem">
+              <canvas id="myCanvas" style="border:1px solid #000000;"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-12">
+        	<div class="card">
+        		<div class="card-header">Answer</div>
+        		<div class="card-body height3">
+                  <table id='ans-log' class='table table-borderless'>
+                  {% for player in players %}
+                        <tr id="player_list_{{player.username}}">
+                            <td>
+                              <div class="img_cont">
+                                  {% with y=forloop.counter|stringformat:"s" %}
+                                  {% with template="drawbud/images/"|add:y|add:".png" %}
+                                  <img src="{% static template %}" class="rounded-circle user_img">
+                                  <span class="title"> {{player.username}}</span>
+                                  {% endwith %}
+                                  {% endwith %}
+                              </div>
+                            </td>
+                        </tr>
+                  {% endfor %}
+                  </table>
+        		</div>
+        	</div>
+        </div>
+        
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+        	<form id="ans-form">
+    				<div class="form-group">
+      				<label>Answer</label>
+      				<input id="ans-message-input" class="form-control" type="text" placeholder="Type your answer" disabled>
+    				</div>
+            <div id="word_section">
+              <button id="ans-message-submit" class="btn btn-warning" disabled>Submit</button>
+            </div>
+			    </form>
+        </div>
+        
+        <div id="message"></div>
+        
+    </div>
+</div>
+{% endblock %}

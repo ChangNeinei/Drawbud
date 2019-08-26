@@ -1,0 +1,46 @@
+{% extends "drawbud/base.html" %}
+{% load staticfiles %}
+{% block navbar %}
+  <li class="nav-item"><a class="nav-link" href="{% url 'lobby' %}">Lobby</a>
+  <li class="nav-item"><a class="nav-link" href="{% url 'myprofile' %}">My Profile</a></li>
+  <li class="active nav-item"><a class="nav-link" href="{% url 'tutorial' %}">Tutorial</a></li>
+  <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+{% block heading-text %}
+Tutorial
+{% endblock %}
+{% block content %}>
+	<div class="album text-muted">
+    	<div class="container">
+    	  	<div class="row justify-content-md-center">
+    	    	<div class="col-sm-8 col-md-7 py-4">
+    	      		<h4 class="text-white">Instructions</h4>
+    	      		<p class="text-muted">
+                    In each round, one person will be drawing an item generated from the question generator. Everyone else will guess what the person is drawing. Users will be assigned three points 
+                    when they get the correct answer. When someone guessed the correct answer of what you are drawing, your
+                    draw will be stored in your profile</p>
+                    <h4 class="text-white">Notes</h4>
+                    <p class="text-muted">
+                    1. Do not click the 
+                    <span style="color:red; font-weight:bold;">back button</span>
+                    or 
+                    <span style="color:red; font-weight:bold;">refresh the page</span>
+                    when you are in a room.
+                    <br>
+                    2. Do not click on 
+                    <span style="color:red; font-weight:bold;">other pages </span>
+                    when you are in a room.
+                    </p>
+    	    	</div>
+    	    </div>
+            <div class="row justify-content-md-center">
+                <div class="col-sm-8 col-md-7 text-center">
+                    <video width="480" height="300"  controls>
+                        <source src="{% static 'drawbud/video/Drawbud.mp4' %}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+    	</div>
+    </div>
+
+{% endblock %}

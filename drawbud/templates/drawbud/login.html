@@ -1,0 +1,59 @@
+{% extends "drawbud/base.html" %}
+{% block navbar %}
+<li class="active nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+{% endblock %}
+{% block heading-text %}
+Welcome to DrawBud
+{% endblock %}
+{% block content %}
+<div class="container-fluid">
+<div class="row">
+  <div class="col-sm-4 offset-sm-4 text-center">
+    <h1 class="display-4" style="margin-top: 5rem; margin-bottom: 3rem">Login</h1>
+    <form method="post" action="{% url 'login' %}" novalidate>
+      <div class="form-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-user"></i>
+          </span>
+          {% if form.username.errors %}
+          <input id="username" type="text" class="form-control is-invalid" name="username" 
+            placeholder="Username" value="{{form.username.value}}">
+          {% else %}
+          <input id="username" type="text" class="form-control" name="username" 
+            placeholder="Username" value="{{form.username.value}}">
+          {% endif %}
+        </div>
+        {% for error in form.username.errors %}
+          <div class="error">
+            {{error}}
+          </div>
+        {% endfor %}
+      </div>
+      <div class="form-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            <i class="fa fa-lock"></i>
+          </span>
+          {% if form.password.errors %}
+          <input id="password" type="password" class="form-control is-invalid" name="password" 
+          placeholder="Password">
+          {% else %}
+          <input id="password" type="password" class="form-control" name="password" 
+          placeholder="Password">
+          {% endif %}
+        </div>
+        {% for error in form.password.errors %}
+          <div class="error">
+            {{error}}
+          </div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="btn btn-outline-dark">Login</button>
+      {% csrf_token %}
+    </form>
+  </div>
+</div>
+</div>
+{% endblock %}

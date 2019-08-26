@@ -1,0 +1,129 @@
+{% extends "drawbud/base.html" %}
+{% load staticfiles %}
+{% block navbar %}
+<li class="nav-item"><a class="nav-link" href="{% url 'lobby' %}">Lobby</a>
+<li class="active nav-item"><a class="nav-link" href="{% url 'myprofile' %}">My Profile</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'tutorial' %}">Tutorial</a></li>
+<li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a>
+{% endblock %}
+{% block heading-text %}
+	{{user.first_name}} {{user.last_name}}
+{% endblock %}
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="profile-img"> 
+				{% for item in items %}
+					{% if item.profile_picture %}
+						<img src="{% url 'photo' item.id %}" alt="user picture can't be displayed" style="width: 250px; height: 250px">
+						<br>
+					{% else %}
+						<img src="{% static 'drawbud/images/default.jpg' %}" alt="">
+					{% endif %}
+					<br>
+				{% endfor %}
+
+				<form enctype="multipart/form-data" action="{% url 'myprofile' %}" method="POST">
+					<table>
+						<tr>
+							<td align="center">{{form.profile_picture}}</td>
+							<td class="errorlist">
+								{% for error in field.errors %}
+									{{error}}
+								{% endfor %}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<br>
+								<input type="submit" name="Submit" value="Update" class="btn btn-warning" style="position: relative; left: 20%"></input>
+							</td>
+						</tr>
+					</table>
+					{% csrf_token %}
+				</form>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="profile-head">
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item">
+                        <a class="nav-link active text-warning" style="font-size: 20px;" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="true" >About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" style="font-size: 20px;" id="score-tab" data-toggle="tab" href="#score" role="tab" aria-controls="score" aria-selected="false">Score</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-warning" style="font-size: 20px;" id="drawing-tab" data-toggle="tab" href="#drawing" role="tab" aria-controls="drawing" aria-selected="false">Drawings</a>
+                    </li>
+				</ul>
+				<br>
+				<div class="col-md-8 profile">
+					<div class="tab-content profile-tab">
+						<div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+							<div class="row">
+                                <div class="col-md-6">
+                                    <label>Username</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{user.username}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>First Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{user.first_name}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Last Name</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{user.last_name}}</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <p>{{user.email}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="score" role="tabpanel" aria-labelledby="score-tab">
+           					<div class="row">
+                    			<div class="col-md-6">
+                        			<div class="list-group">
+							  			Your Score: 
+							  			{% for item in items %} 
+							  				{{item.score}}
+							  			{% endfor %}
+									</div>
+                    			</div>
+                			</div>
+           				</div>
+           				<div class="tab-pane fade" id="drawing" role="tabpanel" aria-labelledby="drawing-tab">
+           					<div class="row">
+                    			<div class="col-md-6">
+                        			<div class="list-group text-warning">
+                        				{% for drawing in drawings %} 
+							  			<a href="{% url 'drawing' drawing.id %}" class="list-group-item list-group-item-action bg-transparent">
+									    	{{drawing.text}}
+									    </a>
+									    {% endfor %}
+									</div>
+                    			</div>
+                			</div>
+           				</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
